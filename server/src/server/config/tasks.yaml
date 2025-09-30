@@ -1,0 +1,10 @@
+research_task:
+  description: >
+    Using Chrome, actively navigate to research {topic}. Open a new tab, visit relevant
+    websites, perform searches, click promising results, and wait for key content to load
+    as needed. Prioritize up-to-date sources given the current year is {current_year}.
+  expected_output: >
+    1) A concise list of 10 bullet points with the most relevant findings about {topic}.
+    2) A short step-by-step summary of the navigation actions taken (sites visited,
+       searches performed, and key pages consulted).
+  agent: operator
