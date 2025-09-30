@@ -1,54 +1,78 @@
-# Server Crew
+# Python Server Setup (crewAI)
 
-Welcome to the Server Crew project, powered by [crewAI](https://crewai.com). This template is designed to help you set up a multi-agent AI system with ease, leveraging the powerful and flexible framework provided by crewAI. Our goal is to enable your agents to collaborate effectively on complex tasks, maximizing their collective intelligence and capabilities.
+This guide sets up the Python backend in `server/` using [uv](https://docs.astral.sh/uv/) and runs the crew via project scripts.
 
-## Installation
+## Prerequisites
+- Python >= 3.10 and < 3.14
+- pip (to install uv) or another way to install uv
 
-Ensure you have Python >=3.10 <3.14 installed on your system. This project uses [UV](https://docs.astral.sh/uv/) for dependency management and package handling, offering a seamless setup and execution experience.
-
-First, if you haven't already, install uv:
-
+## 1) Install uv (once)
 ```bash
 pip install uv
 ```
 
-Next, navigate to your project directory and install the dependencies:
-
-(Optional) Lock the dependencies and install them by using the CLI command:
+## 2) Create and activate a virtual environment (Windows PowerShell)
 ```bash
-crewai install
-```
-### Customizing
-
-**Add your `OPENAI_API_KEY` into the `.env` file**
-
-- Modify `src/server/config/agents.yaml` to define your agents
-- Modify `src/server/config/tasks.yaml` to define your tasks
-- Modify `src/server/crew.py` to add your own logic, tools and specific args
-- Modify `src/server/main.py` to add custom inputs for your agents and tasks
-
-## Running the Project
-
-To kickstart your crew of AI agents and begin task execution, run this from the root folder of your project:
-
-```bash
-$ crewai run
+cd server
+uv venv
+.venv\Scripts\activate
 ```
 
-This command initializes the server Crew, assembling the agents and assigning them tasks as defined in your configuration.
+macOS/Linux:
+```bash
+cd server
+uv venv
+source .venv/bin/activate
+```
 
-This example, unmodified, will run the create a `report.md` file with the output of a research on LLMs in the root folder.
+## 3) Install project dependencies
+Installs from `pyproject.toml`.
+```bash
+uv pip install -e .
+```
 
-## Understanding Your Crew
+## 4) Environment variables
+Create a `.env` file in `server/` (or project root) and add keys as needed, for example:
+```bash
+OPENAI_API_KEY=your_key_here
+```
 
-The server Crew is composed of multiple AI agents, each with unique roles, goals, and tools. These agents collaborate on a series of tasks, defined in `config/tasks.yaml`, leveraging their collective skills to achieve complex objectives. The `config/agents.yaml` file outlines the capabilities and configurations of each agent in your crew.
+## 5) Configure your crew
+- Edit `src/server/config/agents.yaml`
+- Edit `src/server/config/tasks.yaml`
+- Extend logic/tools in `src/server/crew.py`
+- Adjust entrypoints in `src/server/main.py`
 
-## Support
+## 6) Run
+Use project scripts defined in `pyproject.toml`:
+```bash
+# from server/ (venv active)
+uv run run_crew     # or: uv run server
 
-For support, questions, or feedback regarding the Server Crew or crewAI.
-- Visit our [documentation](https://docs.crewai.com)
-- Reach out to us through our [GitHub repository](https://github.com/joaomdmoura/crewai)
-- [Join our Discord](https://discord.com/invite/X4JWnZnxPb)
-- [Chat with our docs](https://chatg.pt/DWjSBZn)
+# other utilities
+uv run train
+uv run replay
+uv run test
+```
 
-Let's create wonders together with the power and simplicity of crewAI.
+Alternatively, from the project root with the venv active, you can run:
+```bash
+crewai run
+```
+
+## Notes
+- If `uv` is unavailable in your PATH after installation, restart your shell.
+- If imports fail, confirm your venv is active and rerun the install step.
+
+## Project structure (server)
+```
+server/
+├─ pyproject.toml          # dependencies and scripts
+├─ src/server/
+│  ├─ config/
+│  │  ├─ agents.yaml
+│  │  └─ tasks.yaml
+│  ├─ crew.py
+│  └─ main.py
+└─ knowledge/
+```
