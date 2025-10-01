@@ -5,27 +5,35 @@ A complete audio transcription system with Python FastAPI backend and Next.js fr
 ## Architecture
 
 This project consists of two separate components:
+
 - **Backend**: Python FastAPI server (port 8081)
 - **Frontend**: Next.js web application (port 3001)
 
 ## Backend Setup (Python FastAPI)
 
 ### Prerequisites
+
 - Python 3.8+
 - UV package manager (recommended)
 
 ### Installation
 
 1. Navigate to the server directory:
+
 ```bash
 cd server
 ```
 
 2. Create and activate a virtual environment:
+
 ```bash
 # Windows PowerShell
 uv venv
 .venv\Scripts\activate
+
+# in server dir
+.venv\Scripts\activate
+.\.venv\Scripts\Activate.ps1
 
 # Linux/macOS (bash/zsh)
 uv venv
@@ -33,28 +41,33 @@ source .venv/bin/activate
 ```
 
 3. Install dependencies:
+
 ```bash
- 
+
 ```
 
 ### Running the Server
 
 #### Option 1: Using the run script
+
 ```bash
 python run_server.py
 ```
 
 #### Option 2: Direct execution
+
 ```bash
 python app.py
 ```
 
 #### Option 3: Using uvicorn directly
+
 ```bash
 uvicorn app:app --host 0.0.0.0 --port 8081 --reload
 ```
 
 The API server will be available at:
+
 - **Local**: http://localhost:8081
 - **API Docs**: http://localhost:8081/docs
 - **Health Check**: http://localhost:8081/health
@@ -62,17 +75,20 @@ The API server will be available at:
 ## Frontend Setup (Next.js)
 
 ### Prerequisites
+
 - Node.js 18+
 - npm, yarn, or pnpm
 
 ### Installation
 
 1. Navigate to the web directory:
+
 ```bash
 cd web
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 # or
@@ -89,6 +105,7 @@ pnpm dev
 ```
 
 The web interface will be available at:
+
 - **Local**: http://localhost:3001
 
 ### Build for Production
@@ -108,11 +125,13 @@ The server runs on port 8081 as a minimal FastAPI application. It's designed to 
 ## Features
 
 ### Backend Features
+
 - **Minimal Setup**: Basic FastAPI server with logging
 - **Extensible**: Ready to add custom endpoints and functionality
 - **Production Ready**: Includes proper logging and error handling
 
 ### Frontend Features
+
 - **Modern UI**: Beautiful, responsive interface built with Next.js and Tailwind CSS
 - **Drag & Drop**: Intuitive file upload with drag-and-drop support
 - **Real-time Progress**: Visual feedback during transcription
@@ -145,12 +164,14 @@ browsergod/
 ## Getting Started
 
 1. **Start the Backend**:
+
    ```bash
    cd server
    python run_server.py
    ```
 
 2. **Start the Frontend** (in a new terminal):
+
    ```bash
    cd web
    npm run dev
@@ -170,17 +191,20 @@ browsergod/
 ## Troubleshooting
 
 ### Backend Issues
+
 - Check if the WhisperX model loads correctly on startup
 - Verify all Python dependencies are installed
 - If you see "Package fastapi is not installed", activate the venv and reinstall: `.venv\Scripts\activate` then `uv pip install -r server/requirements.txt`
 - Check the server logs for detailed error messages
 
 ### Frontend Issues
+
 - Ensure Node.js dependencies are installed
 - Check browser console for JavaScript errors
 - Verify the backend API is accessible from the frontend
 
 ### Port Conflicts
+
 - Backend uses port 8081
 - Frontend uses port 3001
 - Change ports in the respective configuration files if needed
